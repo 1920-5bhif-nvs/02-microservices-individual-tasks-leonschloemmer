@@ -12,7 +12,8 @@ public class Chapter {
 
     private String name;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "chapter_id")
     private List<RevisionDate> dates;
 
     public Chapter() {
