@@ -12,7 +12,7 @@ public class RevisionDate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int order;
+    private int revisionOrder;
     private LocalDate revisionDate;
 
     public RevisionDate() {
@@ -27,12 +27,12 @@ public class RevisionDate {
         this.id = id;
     }
 
-    public int getOrder() {
-        return order;
+    public int getRevisionOrder() {
+        return revisionOrder;
     }
 
-    public void setOrder(int order) {
-        this.order = order;
+    public void setRevisionOrder(int order) {
+        this.revisionOrder = order;
     }
 
     public LocalDate getRevisionDate() {

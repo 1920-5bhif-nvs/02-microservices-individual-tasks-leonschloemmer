@@ -26,10 +26,17 @@ public class ChapterRepository {
      * Create a new chapter and persist in database.
      * Also creates all initial revision dates
      * @param name the name of the chapter to be created
-     * @return
+     * @return The created chapter with the dates
      */
     public Chapter createNewChapter(String name) {
-        throw new NotImplementedException();
+//        throw new NotImplementedException();
+        Chapter newChapter = new Chapter();
+        newChapter.setName(name);
+
+        // TODO implement properly, get dates from date service
+        newChapter.setDates(null);
+
+        return newChapter;
     }
 
 }
