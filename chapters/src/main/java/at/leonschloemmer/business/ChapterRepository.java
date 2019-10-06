@@ -1,11 +1,12 @@
 package at.leonschloemmer.business;
 
 import at.leonschloemmer.entities.Chapter;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @ApplicationScoped
@@ -14,12 +15,17 @@ public class ChapterRepository {
     @Inject
     EntityManager em;
 
+    @Inject
+    DatesCommunicator com;
+
     /**
      * Get all chapters in database
      * @return List of all persisted chapters
      */
     public List<Chapter> getAllChapters() {
-        throw new NotImplementedException();
+        TypedQuery<Chapter> query = em.createNamedQuery("Chapter.findAll", Chapter.class);
+        List<Chapter> result = query.getResultList();
+        return result;
     }
 
     /**
@@ -28,13 +34,15 @@ public class ChapterRepository {
      * @param name the name of the chapter to be created
      * @return The created chapter with the dates
      */
+    @Transactional
     public Chapter createNewChapter(String name) {
 //        throw new NotImplementedException();
         Chapter newChapter = new Chapter();
         newChapter.setName(name);
 
-        // TODO implement properly, get dates from date service
-        newChapter.setDates(null);
+        newChapter.setDates(com.getDates());
+
+        em.persist(newChapter);
 
         return newChapter;
     }
