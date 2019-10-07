@@ -1,6 +1,7 @@
 package at.leonschloemmer.business;
 
 import at.leonschloemmer.entities.Chapter;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -17,7 +18,8 @@ public class ChapterRepository {
     EntityManager em;
 
     @Inject
-    DatesCommunicator com;
+    @RestClient
+    DatesService datesService;
 
     /**
      * Get all chapters in database
@@ -41,7 +43,7 @@ public class ChapterRepository {
         Chapter newChapter = new Chapter();
         newChapter.setName(name);
 
-        newChapter.setDates(com.getDates());
+        newChapter.setDates(datesService.getDates());
 
         em.persist(newChapter);
 
