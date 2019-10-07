@@ -5,6 +5,7 @@ import at.leonschloemmer.entities.Chapter;
 
 import javax.inject.Inject;
 import javax.json.JsonObject;
+import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -24,11 +25,9 @@ public class ChapterEndpoint {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-//    @Path("{name}")
     public Response createNew(@QueryParam("name") String name) {
-        System.out.println(name);
         Chapter c = repository.createNewChapter(name);
-        return Response.ok().entity(repository.createNewChapter(name)).build();
+        return Response.ok().entity(c).build();
     }
 
 }

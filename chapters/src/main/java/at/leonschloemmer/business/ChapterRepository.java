@@ -4,12 +4,13 @@ import at.leonschloemmer.entities.Chapter;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
 
-@ApplicationScoped
+@Singleton
 public class ChapterRepository {
 
     @Inject

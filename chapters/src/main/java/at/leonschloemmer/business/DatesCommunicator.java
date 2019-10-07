@@ -1,9 +1,11 @@
 package at.leonschloemmer.business;
 
 import at.leonschloemmer.entities.RevisionDate;
+import io.quarkus.runtime.StartupEvent;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.event.Observes;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.ws.rs.client.Client;
@@ -19,12 +21,12 @@ import java.util.List;
 public class DatesCommunicator {
 
     @ConfigProperty(name = "datescommunicator.url")
-    private String url;
+    String url;
 
     private Client client;
     private WebTarget target;
 
-    public DatesCommunicator() {
+    public void onStart(@Observes StartupEvent event) {
         client = ClientBuilder.newClient();
         target = client.target(url);
     }
